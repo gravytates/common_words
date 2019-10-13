@@ -28,7 +28,7 @@ class WordFrequency
       three_word_frequency_hash[three_words] += 1
     end  
 
-    top_hundred_word_triplets = three_word_frequency_hash.sort_by {|k,v| v}.reverse.last(10)
+    top_hundred_word_triplets = three_word_frequency_hash.sort_by {|k,v| v}.reverse.first(100)
 
     top_hundred_word_triplets.each do |key,value|
       words = key.join(' ')
