@@ -4,25 +4,31 @@ class WordFrequency
   def self.top_word_triplets
     areArgumentsPresent = !ARGV.empty?
     files = areArgumentsPresent ? ARGV : ARGF
+    words = ""
     three_word_frequency_hash = Hash.new(0)
-
-    for file in files
-      words = ""
-      areArgumentsPresent ? File.open(file).each { |line| words += line } : words = file
-      delimiters = [/\s/, "\n", '\n']
-      words = words.split(Regexp.union(delimiters))
-        .map {|w| format_word(w)}
-        .delete_if {|w| w.length == 0}
-      words.each_with_index do |word, index|
-        if words[index+2].nil?
-        next 
-        end
-        three_words = [word, words[index+1], words[index+2]]
-        three_word_frequency_hash[three_words] += 1
+    delimiters = [/\s/, "\n", '\n']
+ 
+    files.each do |file| 
+      if areArgumentsPresent 
+        File.readlines(file).each { |line| words += line }
+      else 
+        words += file
       end
     end
 
-    top_hundred_word_triplets = three_word_frequency_hash.sort_by {|k,v| v}.reverse.first(100)
+    formatted_words = words.split(Regexp.union(delimiters))
+      .map {|w| format_word(w)}
+      .delete_if {|w| w.length == 0}
+
+    formatted_words.each_with_index do |word, index|
+      if formatted_words[index+2].nil?
+        next 
+      end
+      three_words = [word, formatted_words[index+1], formatted_words[index+2]]
+      three_word_frequency_hash[three_words] += 1
+    end  
+
+    top_hundred_word_triplets = three_word_frequency_hash.sort_by {|k,v| v}.reverse.last(10)
 
     top_hundred_word_triplets.each do |key,value|
       words = key.join(' ')
