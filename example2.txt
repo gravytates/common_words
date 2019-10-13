@@ -7,3 +7,9 @@ line
 yo
 ha
 .
+.
+I love\nsandwiches.
+(I LOVE SANDWICHES!!)
+i\nlove
+sandwiches?
+ok
