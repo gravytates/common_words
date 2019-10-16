@@ -1,9 +1,9 @@
 Brightness my old friend.
-It's
-another
+\r\nIt's
+\nanother
 line
-yo
-ha
+yo\r\n
+ha\n\n
 .
 .
 I love\nsandwiches.

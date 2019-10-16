@@ -16,10 +16,14 @@ class WordFrequency
     delimiters = [/\s/, "\n", '\n', "\r\n", '\r\n']
  
     @files.each do |file| 
-      if hasArguments 
-        File.readlines(file).each { |line| words += line }
+      if hasArguments && file
+        File.readlines(file).each { |line| 
+          if line 
+            words += line.to_s 
+          end
+        }
       else 
-        words += file
+        words += file.to_s
       end
     end
 
@@ -37,16 +41,15 @@ class WordFrequency
 
     top_hundred_word_triplets = three_word_frequency_hash.sort_by {|k,v| v}.reverse.first(100)
 
-    @result = ""
+    @result = String.new
     top_hundred_word_triplets.each do |key,value|
       words = key.join(' ')
       @result += "#{value} - #{words}, "
     end
-
     # print to terminal
     print @result
-    # return result for testing, other uses
-    return @result
+    # return @result for testing, other usese
+    @result
   end
 
   
