@@ -13,7 +13,7 @@ class WordFrequency
     end
     words = ""
     three_word_frequency_hash = Hash.new(0)
-    delimiters = [/\s/, "\n", '\n']
+    delimiters = [/\s/, "\n", '\n', "\r\n", '\r\n']
  
     @files.each do |file| 
       if hasArguments 
@@ -40,7 +40,7 @@ class WordFrequency
     @result = ""
     top_hundred_word_triplets.each do |key,value|
       words = key.join(' ')
-      @result += "#{value} - #{words}, \n"
+      @result += "#{value} - #{words}, "
     end
 
     # print to terminal
